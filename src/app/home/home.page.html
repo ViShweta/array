@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Customer
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="custForm" (ngSubmit)="onSubmit(custForm.value)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item lines="full">
+            <ion-label position="floating">Name</ion-label>
+            <ion-input formControlName="name" label="Solid input" label-placement="floating" fill="solid"
+              placeholder="Enter text"> </ion-input>
+          </ion-item>
+          <div *ngIf="custForm.controls['name'].invalid && custForm.controls['name'].touched"
+            class="alert alert-danger">
+            Enter Valid Name
+            <div *ngIf="custForm.controls['name'].errors?.['required' ]" position="floating"> Fullname is required
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email" placeholder="email"></ion-input>
+          </ion-item>
+          <div *ngIf="custForm.controls['email'].invalid && custForm.controls['email'].touched"
+            class="alert alert-danger">
+            Enter Valid Email
+            <div *ngIf="custForm.controls['email'].errors?.['required' ]" position="floating"> Vaild Email is required
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="full">
+            <ion-label position="floating">Mobile</ion-label>
+            <ion-input formControlName="mobile" type="text" placeholder="Number"></ion-input>
+          </ion-item>
+          <div *ngIf="custForm.controls['mobile'].invalid && custForm.controls['mobile'].touched"
+            class="alert alert-danger">
+            Enter Valid Mobile
+            <div *ngIf="custForm.controls['mobile'].errors?.['required' ]"> Vaild Number is required
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header>
+            <ion-label><b>Interest</b></ion-label>
+          </ion-list-header>
+          <div formArrayName="interset">
+            <div *ngFor="let intersetGroup of interset?.controls; let i = index" [formGroupName]="i">
+              <ion-button (click)="removeinterset(i)" *ngIf="i > 0">
+                <ion-icon name='close-circle-outline'></ion-icon>
+              </ion-button>
+              <input type="text" formControlName="title" placeholder="name" />
+              <ion-button (click)="addinterset()">
+                <ion-icon name='add-circle-outline' width="200" height="200"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+          <div *ngIf="custForm.controls['mobile'].invalid && custForm.controls['mobile'].touched"
+          class="alert alert-danger">
+          Enter Hobbies 
+          <div *ngIf="custForm.controls['mobile'].errors?.['required' ]"> Hobbies  is required
+          </div>
+        </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button type="submit" color="danger" expand="block" [disabled]="custForm.invalid">Submit</ion-button>
+        </ion-col>
+        <!-- <ion-col>
+          <ion-button [routerLink]="['/view']" fill="clear" expand="block">View Customer List</ion-button>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

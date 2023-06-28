@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="editForm" (ngSubmit)="OnEdit(editForm.value)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item lines="full">
+            <ion-label position="floating">Name</ion-label>
+            <ion-input formControlName="name" label="Solid input" label-placement="floating" fill="solid"
+              placeholder="Enter text"> </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email" placeholder="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="full">
+            <ion-label position="floating">Mobile</ion-label>
+            <ion-input formControlName="mobile" type="text" placeholder="Number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header>
+            <ion-label><b>Interest</b></ion-label>
+          </ion-list-header>
+          <div formArrayName="interset">
+            <div *ngFor="let intersetGroup of interset.controls; index as i" [formGroupName]="i">
+              <ion-button (click)="removeinterset(i)" *ngIf="i > 0">
+                <ion-icon name='close-circle-outline'></ion-icon>
+              </ion-button>
+              <input type="text" formControlName="title" placeholder="name" />
+              <ion-button (click)="addinterset()">
+                <ion-icon name='add-circle-outline' width="200" height="200"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button type="submit" color="danger" expand="block" >Edit</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
